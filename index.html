@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Emma 🎉</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6f5, #ffffff);
+  font-family: "Comic Sans MS", "Segoe UI", cursive;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Title animation */
+h1 {
+  margin-top: 80px;
+  color: #ff4da6;
+  font-size: 42px;
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.7);}
+  to {opacity: 1; transform: scale(1);}
+}
+
+/* Balloons */
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  font-size: 55px;
+  cursor: pointer;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from {transform: translateY(0);}
+  to {transform: translateY(-120vh);}
+}
+
+/* Photo popup */
+#photoPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  display: none;
+  z-index: 10;
+}
+
+#photoPopup img {
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  top: 0;
+  font-size: 20px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  from {transform: translateY(-50px);}
+  to {transform: translateY(110vh);}
+}
+
+/* Cake animation */
+#cake {
+  font-size: 90px;
+  margin-top: 20px;
+  display: none;
+  animation: pop 1s ease forwards;
+}
+
+@keyframes pop {
+  from {transform: scale(0);}
+  to {transform: scale(1);}
+}
+
+/* Final message */
+#finalMessage {
+  display: none;
+  margin-top: 20px;
+  font-size: 24px;
+  color: #444;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Happy Birthday Emma 🎉</h1>
+<p>Tap the balloons 🎈</p>
+
+<div id="photoPopup">
+  <img id="popupImg" src="">
+</div>
+
+<div id="cake">🎂</div>
+<div id="finalMessage">Wishing you the happiest birthday ever ❤️</div>
+
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const photos = [
+  "https://picsum.photos/300/400?random=1",
+  "https://picsum.photos/300/400?random=2",
+  "https://picsum.photos/300/400?random=3",
+  "https://picsum.photos/300/400?random=4"
+];
+
+let clicks = 0;
+
+// Create balloons
+function createBalloon() {
+  const balloon = document.createElement("div");
+  balloon.className = "balloon";
+  balloon.innerHTML = "🎈";
+
+  balloon.style.left = Math.random() * 100 + "vw";
+  balloon.style.animationDuration = 5 + Math.random() * 4 + "s";
+
+  document.body.appendChild(balloon);
+
+  balloon.addEventListener("click", () => {
+    document.getElementById("popupImg").src = photos[clicks];
+    document.getElementById("photoPopup").style.display = "block";
+
+    setTimeout(() => {
+      document.getElementById("photoPopup").style.display = "none";
+    }, 2000);
+
+    balloon.remove();
+    clicks++;
+
+    if (clicks === 4) {
+      showFinalSurprise();
+    }
+  });
+
+  setTimeout(() => {
+    balloon.remove();
+  }, 9000);
+}
+
+setInterval(createBalloon, 800);
+
+// Confetti explosion
+function showFinalSurprise() {
+
+  // Cake appears
+  document.getElementById("cake").style.display = "block";
+  document.getElementById("finalMessage").style.display = "block";
+
+  // Confetti
+  for (let i = 0; i < 80; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.innerHTML = "🎉";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.animationDuration = 2 + Math.random() * 2 + "s";
+    document.body.appendChild(confetti);
+  }
+}
+</script>
+
+</body>
+</html>
