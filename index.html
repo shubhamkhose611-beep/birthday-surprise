@@ -103,7 +103,7 @@ h1 {
 <p>Tap the balloons 🎈</p>
 
 <div id="photoPopup">
-  <img id="popupImg" src="">
+  <img id="popupImg" src="" style="max-width:100%; height:auto;">
 </div>
 
 <div id="cake">🎂</div>
@@ -116,12 +116,11 @@ h1 {
 
 <script>
 const photos = [
-  "https://github.com/shubhamkhose611-beep/birthday-surprise/blob/main/photo1.jpeg",
-  "https://github.com/shubhamkhose611-beep/birthday-surprise/blob/main/photo2.jpeg",
-  "https://github.com/shubhamkhose611-beep/birthday-surprise/blob/main/photo3.jpeg",
-  "https://github.com/shubhamkhose611-beep/birthday-surprise/blob/main/photo4.jpeg"
+  "./photo1.jpeg",
+  "./photo2.jpeg",
+  "./photo3.jpeg",
+  "./photo4.jpeg"
 ];
-
 let clicks = 0;
 
 // Create balloons
@@ -137,7 +136,7 @@ function createBalloon() {
 
   balloon.addEventListener("click", () => {
     document.getElementById("popupImg").src = photos[clicks];
-    document.getElementById("photoPopup").style.display = "block";
+    document.getElementById("popupImg").style.display = "block";
 
     setTimeout(() => {
       document.getElementById("photoPopup").style.display = "none";
